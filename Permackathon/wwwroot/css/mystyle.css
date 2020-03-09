@@ -1,0 +1,56 @@
+﻿@font-face {
+    font-family: "Audiowide";
+    src: url("../polices/Audiowide-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Ubuntu-light";
+    src: url("../polices/Ubuntu-Light.ttf");
+}
+
+@font-face {
+    font-family: "Ubuntu-medium";
+    src: url("../polices/Ubuntu-Medium.ttf");
+}
+
+.audiowide {
+    font-family: Audiowide;
+}
+
+.ubuntu-light {
+    font-family: Ubuntu-light;
+}
+
+.ubuntu-medium {
+    font-family: Ubuntu-medium;
+}
+
+.side-nav .logo-sn {
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+.side-nav .logo-sn img {
+    height: 38px;
+}
+
+ul.stepper .step.active:before {
+    content: '\f00c';
+    font-size: 1rem;
+}
+
+ul.stepper .step.done:before, ul.stepper .step.wrong:before {
+    font-family: 'Font Awesome 5 free';
+    font-weight: 900;
+}
+/*Fixer legend footer center bas*/
+.site {
+    display : flex;
+    min-height : 100vh;
+    flex-direction: column;
+}
+
+.site-content {
+    flex : 1;
+}
+/*Fixer legend footer center bas*/

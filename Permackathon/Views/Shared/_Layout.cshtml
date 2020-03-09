@@ -1,48 +1,301 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<Permackathon.DAL.ApplicationUser> SignInManager
+@inject UserManager<Permackathon.DAL.ApplicationUser> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Permackathon</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>@ViewData["Title"]</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="~/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="~/mdb/mdb.min.css" rel="stylesheet">
+    <link href="~/mdb/mdb.lite.min.css" rel="stylesheet">
+    <link href="~/css/mystyle.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://www.permafungi.be/wp-content/uploads/2018/10/logo-png-80x80.png" />
+    <style scoped>
+        .dropdown-toggle:after {
+            display: none;
+        }
+    </style>
+    @RenderSection("Styles", false)
 </head>
-<body>
+
+<body class="hidden-sn mdb-skin site">
+    <!--Double navigation-->
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Permackathon</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        <!-- Sidebar navigation -->
+        <div id="slide-out" class="side-nav sn-bg-4">
+            <ul class="custom-scrollbar">
+                <!-- Logo -->
+                <li style="background-color: white">
+                    <a asp-controller="Home" asp-action="Index" class="waves-light p-4" style="width: 100%; height: 100%;">
+                        <img src="https://www.permafungi.be/wp-content/uploads/2018/10/logo-png-80x80.png" class="img-fluid flex-center" style="width: 100%; height: 100%;">
+                    </a>
+                </li>
+                <!--/. Logo -->
+                <!--Social-->
+                <li>
+                    <ul class="social">
+                        <li><a href="#" class="icons-sm fb-ic"><i class="fab fa-facebook-f"> </i></a></li>
+                        <li><a href="#" class="icons-sm pin-ic"><i class="fab fa-linkedin"> </i></a></li>
+                    </ul>
+                </li>
+                <!--/Social-->
+                <!--Search Form-->
+                <li>
+                    <form class="search-form ubuntu-light" role="search">
+                        <div class="form-group md-form mt-0 pt-1 waves-light">
+                            <input type="text" class="form-control" placeholder="Rechercher">
+                        </div>
+                    </form>
+                </li>
+                <!--/.Search Form-->
+                <!-- Side navigation links -->
+                <li>
+                    <ul class="collapsible collapsible-accordion ubuntu-light">
+                        <li>
+                            <a asp-controller="Lodging" asp-action="Dashboard" class="collapsible-header waves-effect arrow-r">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li>
+                            <a asp-controller="Lodging" asp-action="Index" class="collapsible-header waves-effect arrow-r">
+                                <i class="fas fa-book-open"></i> Catalogue
+                            </a>
+                        </li>
+                        <li>
+                            <a class="collapsible-header waves-effect arrow-r">
+                                <i class="fas fa-home"></i> Gérer mes logements
+                                <i class="fas fa-angle-down rotate-icon"></i>
+                            </a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li>
+                                        <a asp-controller="Lodging" asp-action="MyLodgings" class="waves-effect">Mes logements</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="House" asp-action="Create" class="waves-effect">Nouvelle maison</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Apartment" asp-action="Create" class="waves-effect">Nouvel appartement</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Room" asp-action="Create" class="waves-effect">Nouvelle pièce</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="collapsible-header waves-effect arrow-r"><i class="fas fa-handshake"></i> Rendez-vous<i class="fas fa-angle-down rotate-icon"></i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li>
+                                        <a asp-controller="Appointment" asp-action="Index" class="waves-effect">Mes rendez-vous</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="collapsible-header waves-effect arrow-r"><i class="fas fa-euro-sign"></i> Facturation<i class="fas fa-angle-down rotate-icon"></i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li>
+                                        <a href="#" class="waves-effect"> Mes règlements</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="collapsible-header waves-effect arrow-r">
+                                <i class="fas fa-address-book"></i> Contacts<i class="fas fa-angle-down rotate-icon"></i>
+                            </a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li>
+                                        <a asp-controller="Contact" asp-action="Contact" class="waves-effect">Nous contacter</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="waves-effect">FAQ</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - Permackathon - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </li>
+                <!--/. Side navigation links -->
+            </ul>
+            <div class="sidenav-bg mask-strong"></div>
         </div>
+        <!--/. Sidebar navigation -->
+        <!-- Navbar -->
+        <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav" style="background-color: #138bba">
+            <!-- SideNav slide-out button -->
+            <div class="float-left">
+                <a href="#" data-activates="slide-out" class="button-collapse"><i class="fas fa-bars"></i></a>
+            </div>
+            <!-- Breadcrumb-->
+            <div class="breadcrumb-dn mr-auto">
+                <a asp-controller="Home" asp-action="Index" class="audiowide d-inline ml-5">
+                    <img src="https://www.permafungi.be/wp-content/uploads/2018/10/logo-png-80x80.png" alt="Logo Easy Lodge" style="width: 10%; height: 10%;" />
+                    PermaFungi
+                </a>
+            </div>
+            <ul class="nav navbar-nav nav-flex-icons ml-auto">
+                <!-- Dropdown -->
+                <li class="nav-item dropdown notifications-nav mr-2">
+                    <a class="nav-link dropdown-toggle waves-effect" id="notificationItem" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-handshake mr-1"></i>
+                        <span class="counter counter-sm" id="rdvnumber"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-primary" aria-labelledby="notificationItem">
+                        <a class="dropdown-item" href="#">
+                            <i class="far fa-money-bill-alt mr-2" aria-hidden="true"></i>
+                            <span>New order received</span>
+                            <span class="float-right"><i class="far fa-clock" aria-hidden="true"></i> 13 min</span>
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="far fa-money-bill-alt mr-2" aria-hidden="true"></i>
+                            <span>New order received</span>
+                            <span class="float-right"><i class="far fa-clock" aria-hidden="true"></i> 33 min</span>
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-chart-line mr-2" aria-hidden="true"></i>
+                            <span>Your campaign is about to end</span>
+                            <span class="float-right"><i class="far fa-clock" aria-hidden="true"></i> 53 min</span>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fas fa-info-circle"></i> <span class="clearfix d-none d-sm-inline-block">Aide</span></a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Lodging" asp-action="Dashboard" class="nav-link"><i class="fas fa-tachometer-alt"></i> <span class="clearfix d-none d-sm-inline-block">Dashboard</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <a id="manage" asp-area="Identity" asp-page="/Account/Manage/Index" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            @{ var user = await UserManager.GetUserAsync(User); }
+                            <i class="fas fa-user prefix"></i> @user.FirstName
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#"><i class="fas fa-cog prefix"></i> Paramètres</a>
+                            <form id="logoutForm" class="" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button id="logout" type="submit" class="nav-link btn-sm btn-outline-primary text-dark"><i class="fas fa-sign-out-alt prefix"></i>Déconnexion</button>
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <a id="manage" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user prefix"></i> Compte
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" id="login" asp-area="Identity" asp-page="/Account/Login"><i class="fas fa-sign-in-alt prefix"></i> Connexion</a>
+                            <a class="dropdown-item" id="login" asp-area="Identity" asp-page="/Account/Register"><i class="fas fa-user-plus prefix"></i> Inscription</a>
+                        </div>
+                    }
+                </li>
+            </ul>
+        </nav>
+        <!-- /.Navbar -->
+    </header>
+    <!--/.Double navigation-->
+    <!--Main Layout-->
+    <main class="mb-md-4 site-content">
+        <div class="container-fluid">
+            <div class="m-lg-5 m-md-4 m-sm-0 body-content" style="height: auto">
+                @RenderBody()
+            </div>
+        </div>
+    </main>
+
+    <!-- Delete confirmation modal -->
+    <partial name="~/Views/Shared/DeleteConfirmation.cshtml" />
+    <!-- Delete Notification modal -->
+    <partial name="~/Views/Shared/SNotification.cshtml" />
+    <!-- Delete Notification modal -->
+    <partial name="~/Views/Shared/ENotification.cshtml" />
+
+    <!--Main Layout-->
+    <!-- Footer -->
+    <footer class="page-footer pt-4 mt-4 unique-color text-center text-md-left">
+        <!-- Footer Links -->
+        <div class="container">
+            <div class="row">
+                <!-- First column -->
+                <div class="col-md-8 ubuntu-light">
+                    <h6 class="text-uppercase font-weight-bold">Contacts</h6>
+                    <hr />
+                    <p>
+                        <i class="fas fa-map-marker-alt mr-3"></i> Nyékonakpoè, Lomé - TOGO
+                    </p>
+                    <p>
+                        <i class="fas fa-envelope mr-3"></i> myeasylodge@gmail.com
+                    </p>
+                    <p>
+                        <i class="fas fa-phone mr-3"></i> +228 90 76 50 71
+                    </p>
+                </div>
+                <!-- First column -->
+                <!-- Second column -->
+                <div class="col-md-4 ubuntu-light">
+                    <h6 class="text-uppercase font-weight-bold">Liens utiles</h6>
+                    <hr />
+                    <ul class="list-unstyled">
+                        <li><a href="#!"><i class="fab fa-linkedin-in mr-3"></i> Linkedin</a></li>
+                        <li><a href="#!"><i class="fab fa-facebook-f mr-3"></i> Facebook</a></li>
+                        <li><a href="#!"><i class="fab fa-whatsapp mr-3"></i> Whatsapp</a></li>
+                    </ul>
+                </div>
+                <!-- Second column -->
+            </div>
+        </div>
+        <!-- Footer Links -->
+        <!-- Copyright -->
+        <div class="footer-copyright py-3 text-center ubuntu-light">
+            <div class="container-fluid">
+                &copy; 2020 Developed by : <a href="https://www.linkedin.com/in/laba-koami" target="_blank"> Team Koala</a>
+            </div>
+        </div>
+        <!-- Copyright -->
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- Footer -->
+    <!--  SCRIPTS  -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="~/jquery//jquery-3.4.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="~/mdb/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="~/bootstrap/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="~/mdb/mdb.min.js"></script>
+    <script type="text/javascript" src="~/mdb/mdb.lite.min.js"></script>
+    <script type="text/javascript" src="~/js/loading.js"></script>
+    <script type="text/javascript" src="~/businessjs/notifications.js"></script>
     @RenderSection("Scripts", required: false)
+    <script>
+        // SideNav Button Initialization
+        $(".button-collapse").sideNav();
+        // SideNav Scrollbar Initialization
+        var sideNavScrollbar = document.querySelector('.custom-scrollbar');
+        var ps = new PerfectScrollbar(sideNavScrollbar);
+
+        $(function () {
+            $('.material-tooltip-main').tooltip({
+                template: '<div class="tooltip md-tooltip-main"><div class="tooltip-arrow md-arrow"></div><div class="tooltip-inner md-inner-main"></div></div>'
+            });
+        });
+    </script>
 </body>
+
 </html>

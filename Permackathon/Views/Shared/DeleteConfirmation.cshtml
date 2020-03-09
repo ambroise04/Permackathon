@@ -1,0 +1,25 @@
+﻿<!--Modal: modalConfirmDelete-->
+<div class="modal fade ubuntu-light" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+        <!--Content-->
+        <div class="modal-content text-center">
+            <!--Header-->
+            <div class="modal-header d-flex justify-content-center">
+                <p class="heading">Etes-vous sûr de vouloir supprimer ce bien ?</p>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+                @Html.AntiForgeryToken()
+                <i class="fas fa-times fa-4x animated rotateIn"></i>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer flex-center">
+                <a href="" type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">Non</a>
+                <a href="" id="btnConfirm" class="btn btn-danger">Oui</a>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!--Modal: modalConfirmDelete-->

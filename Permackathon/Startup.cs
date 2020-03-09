@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,7 @@ namespace Permackathon
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddRazorPages();
 
             //Our services
             services.AddTransient<IUnitOfWork, UnitOfWork>();
@@ -34,6 +36,8 @@ namespace Permackathon
             services.AddTransient<IFinancialRepository, FinancialRepository>();
             services.AddTransient<IIndicatorRepository, IndicatorRepository>();
             services.AddTransient<ISiteRepository, SiteRepository>();
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>()
+                                                                 .AddDefaultTokenProviders();
 
             //AutoMapper for transfer objects
             //TODO : https://code-maze.com/automapper-net-core/
@@ -50,7 +54,7 @@ namespace Permackathon
             else
             {
                 services.AddDbContext<ApplicationContext>();
-            }            
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,7 +71,10 @@ namespace Permackathon
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseRouting();
 
@@ -78,6 +85,7 @@ namespace Permackathon
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

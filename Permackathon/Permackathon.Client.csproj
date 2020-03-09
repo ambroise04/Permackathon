@@ -13,6 +13,10 @@
     <ProjectReference Include="..\Permackathon.DAL\Permackathon.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\mdb\mdb-addons\" />
+  </ItemGroup>
+
 
 
 </Project>
