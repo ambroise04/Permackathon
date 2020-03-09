@@ -1,4 +1,6 @@
-﻿namespace Permackathon.DAL.Entities
+﻿using System.Collections.Generic;
+
+namespace Permackathon.DAL.Entities
 {
     public class Site
     {
@@ -8,5 +10,6 @@
         public string Phone { get; set; }
         public string Email { get; set; }
         public City City { get; set; }
+        public IList<ActivitySite> ActivitySites { get; set; }
     }
 }

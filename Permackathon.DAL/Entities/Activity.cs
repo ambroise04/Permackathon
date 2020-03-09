@@ -7,6 +7,6 @@ namespace Permackathon.DAL.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public Indicator Indicator { get; set; }
-        public ICollection<ActivitySite> ActivitySites { get; set; }
+        public IList<ActivitySite> ActivitySites { get; set; }
     }
 }

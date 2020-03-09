@@ -1,13 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Permackathon.Common.Interfaces;
+using Permackathon.DAL;
+using Permackathon.DAL.Repositories;
+using Permackathon.DAL.UnitOfWork;
+using System;
 
 namespace Permackathon
 {
@@ -24,6 +25,27 @@ namespace Permackathon
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            //Our services
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IActivityRepository, ActivityRepository>();
+            services.AddTransient<ICityRepository, CityRepository>();
+            services.AddTransient<IFinancialRepository, FinancialRepository>();
+            services.AddTransient<IIndicatorRepository, IndicatorRepository>();
+            services.AddTransient<ISiteRepository, SiteRepository>();
+
+            //DB Context
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT").Equals("Production"))
+            {
+                services.AddDbContext<ApplicationContext>(option =>
+                {
+                    option.UseSqlServer(Configuration.GetConnectionString("Permackathon"));
+                });
+            }
+            else
+            {
+                services.AddDbContext<ApplicationContext>();
+            }            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

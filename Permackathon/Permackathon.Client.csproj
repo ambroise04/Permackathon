@@ -4,6 +4,11 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Permackathon.Common\Permackathon.Common.csproj" />
+    <ProjectReference Include="..\Permackathon.DAL\Permackathon.DAL.csproj" />
+  </ItemGroup>
+
 
 
 </Project>

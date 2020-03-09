@@ -6,9 +6,15 @@ using System;
 
 namespace Permackathon.DAL
 {
-    public class ApplicationContext : IdentityDbContext<IdentityUser, IdentityRole, string>
+    public class ApplicationContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
     {
         public ApplicationContext(){}
+
+        public ApplicationContext(DbContextOptions options) : base(options)
+        {
+            if (options is null)
+                throw new ArgumentNullException("No options for the context!");
+        }
 
         //DbSet
         public DbSet<Activity> Activities { get; set; }
@@ -22,17 +28,19 @@ namespace Permackathon.DAL
         {
             if (optionsBuilder is null)
             {
-                throw new Exception(nameof(optionsBuilder));
+                throw new ArgumentNullException(nameof(optionsBuilder));
             }
 
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(Environment.GetEnvironmentVariable("Connection"));
+                optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=PermackathonDB;Trusted_Connection=True;MultipleActiveResultSets=true");
+                optionsBuilder.EnableSensitiveDataLogging();
             }
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<ActivitySite>().HasKey(ac => new { ac.ActivityId, ac.SiteId });
             base.OnModelCreating(builder);
         }
     }
