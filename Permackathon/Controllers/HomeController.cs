@@ -1,25 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Permackathon.Models;
+using System.Diagnostics;
 
 namespace Permackathon.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IMapper mapper, ILogger<HomeController> logger)
         {
             _logger = logger;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
         {
+            //Sample of automapper usage
+            //ActivityTO activityTO = _mapper.Map<ActivityTO>(activity);
             return View();
         }
 

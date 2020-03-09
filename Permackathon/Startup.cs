@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,10 @@ namespace Permackathon
             services.AddTransient<IFinancialRepository, FinancialRepository>();
             services.AddTransient<IIndicatorRepository, IndicatorRepository>();
             services.AddTransient<ISiteRepository, SiteRepository>();
+
+            //AutoMapper for transfer objects
+            //TODO : https://code-maze.com/automapper-net-core/
+            services.AddAutoMapper(typeof(Startup));
 
             //DB Context
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT").Equals("Production"))
