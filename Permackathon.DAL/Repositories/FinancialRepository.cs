@@ -39,7 +39,7 @@ namespace Permackathon.DAL.Repositories
 
         public ICollection<Financial> GetAll()
         {
-            return Context.Financials.ToList();
+            return Context.Financials.Include(f => f.Activity).ToList();
         }
 
         public Financial Insert(Financial entity)
