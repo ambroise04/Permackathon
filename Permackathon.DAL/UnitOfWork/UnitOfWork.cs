@@ -1,8 +1,6 @@
-﻿using Permackathon.Common.Interfaces;
+﻿using Permackathon.DAL.Interfaces;
 using Permackathon.DAL.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Permackathon.DAL.UnitOfWork
 {
@@ -16,11 +14,11 @@ namespace Permackathon.DAL.UnitOfWork
         }
 
         private bool disposedValue = false;
-        private IActivityRepository _activityRepository { get; set; }
-        private ICityRepository _cityRepository { get; set; }
-        private IFinancialRepository _financialRepository { get; set; }
-        private IIndicatorRepository _indicatorRepository { get; set; }
-        private ISiteRepository _siteRepository { get; set; }
+        private ActivityRepository _activityRepository { get; set; }
+        private CityRepository _cityRepository { get; set; }
+        private FinancialRepository _financialRepository { get; set; }
+        private IndicatorRepository _indicatorRepository { get; set; }
+        private SiteRepository _siteRepository { get; set; }
 
         public IActivityRepository ActivityRepository => _activityRepository ?? new ActivityRepository(Context);
         public ICityRepository CityRepository => _cityRepository ?? new CityRepository(Context);

@@ -15,7 +15,7 @@ namespace Permackathon.BL.UseCases.Charts
 
         public string EatFusion()
         {
-            var s = UnitOfWork.FinancialRepository.GetAll()
+            var s = UnitOfWork.FinancialRepository.
             //store label-value pair
             var dataValuePair = new List<KeyValuePair<string, double>>();
 
