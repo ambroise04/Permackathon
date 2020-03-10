@@ -1,4 +1,4 @@
-﻿using Permackathon.Common.Interfaces;
+﻿using Permackathon.DAL.Interfaces;
 
 namespace Permackathon.DAL.UnitOfWork
 {
