@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Permackathon.Common.Interfaces;
 using Permackathon.DAL;
+using Permackathon.DAL.Interfaces;
 using Permackathon.DAL.Repositories;
 using Permackathon.DAL.UnitOfWork;
 using System;
@@ -53,7 +53,10 @@ namespace Permackathon
             }
             else
             {
-                services.AddDbContext<ApplicationContext>();
+                services.AddDbContext<ApplicationContext>(option =>
+                {
+                    option.UseSqlServer(Configuration.GetConnectionString("Permackathon"));
+                });
             }
         }
 

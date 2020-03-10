@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Permackathon.BL\Permackathon.BL.csproj" />
     <ProjectReference Include="..\Permackathon.Common\Permackathon.Common.csproj" />
     <ProjectReference Include="..\Permackathon.DAL\Permackathon.DAL.csproj" />
   </ItemGroup>
