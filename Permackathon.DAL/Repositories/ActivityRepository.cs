@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Permackathon.Common.Interfaces;
 using Permackathon.DAL.Entities;
+using Permackathon.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +20,7 @@ namespace Permackathon.DAL.Repositories
         {
             if (id <= 0)
                 throw new ArgumentNullException("The Id is not in a correct format.");
-            
+
             var entity = Context.Set<Activity>().Find(id);
             if (entity is null)
                 throw new KeyNotFoundException("The Id doesn't match any activity.");
