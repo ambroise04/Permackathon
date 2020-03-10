@@ -21,7 +21,6 @@ namespace Permackathon.BL.UseCases.Charts
 
         public string Fusion(int activityId, int year)
         {
-            //store label-value pair
             List<KeyValuePair<string, double>> dataValuePair = MonthValues(activityId, year);
 
             var jsonData = JsonConvert.SerializeObject(dataValuePair);

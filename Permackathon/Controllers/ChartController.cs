@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Permackathon.BL.UseCases.Charts;
 using Permackathon.DAL.UnitOfWork;
 using Permackathon.Models;
@@ -8,26 +7,31 @@ using System.Diagnostics;
 
 namespace Permackathon.Controllers
 {
-    public class HomeController : Controller
+    public class ChartController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private FusionChart fusionChart;
+        private PieChart pieChart;
 
-        public HomeController(IUnitOfWork unitOfWork, IMapper mapper, ILogger<HomeController> logger)
+        public ChartController(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _logger = logger;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             fusionChart = new FusionChart(_unitOfWork);
+            pieChart = new PieChart(_unitOfWork);
         }
 
-        public IActionResult Index()
+        public IActionResult Pie()
         {
-            //Sample of automapper usage
-            //ActivityTO activityTO = _mapper.Map<ActivityTO>(activity);
+            var sum = pieChart.InitilizePie(2019);
+            return View();
+        }
+
+        public IActionResult Fusion()
+        {
             var result = fusionChart.Fusion(1, 2019);
+
             return View();
         }
 
