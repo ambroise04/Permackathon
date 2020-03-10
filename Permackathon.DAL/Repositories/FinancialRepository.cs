@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Permackathon.Common.Interfaces;
+using Permackathon.DAL.Interfaces;
 using Permackathon.DAL.Entities;
 using System;
 using System.Collections.Generic;
