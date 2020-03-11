@@ -30,7 +30,7 @@ namespace Permackathon.Controllers
 
         public IActionResult Fusion()
         {
-            var result = fusionChart.Fusion(1, 2019);
+            var result = fusionChart.Fusion(2019);
 
             return View();
         }

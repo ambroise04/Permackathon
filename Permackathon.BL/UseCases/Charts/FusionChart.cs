@@ -13,17 +13,40 @@ namespace Permackathon.BL.UseCases.Charts
         {
             Jan, Fev, Mar, Avr, Mai, Jui, Juil, Aoû, Sep, Oct, Nov, Déc
         }
+        public enum Activities
+        {
+            EAT, GROW, LEARN
+        }
 
         public FusionChart(IUnitOfWork unitOfWork)
         {
             UnitOfWork = unitOfWork;
         }
 
-        public string Fusion(int activityId, int year)
+        public string Fusion(int year)
         {
-            List<KeyValuePair<string, double>> dataValuePair = MonthValues(activityId, year);
+            Dictionary<string, List<KeyValuePair<string, double>>> dictionary = new Dictionary<string, List<KeyValuePair<string, double>>>();
+            var activities = UnitOfWork.ActivityRepository.GetAll();
+            foreach (var activity in activities)
+            {
+                //List<KeyValuePair<string, double>> dataValuePair = MonthValues(activity.Id, year);
+                switch (activity.Id)
+                {
+                    case 1:
+                        dictionary.Add(Activities.EAT.ToString(), MonthValues(activity.Id, year));
+                        break;
+                    case 2:
+                        dictionary.Add(Activities.GROW.ToString(), MonthValues(activity.Id, year));
+                        break;
+                    case 3:
+                        dictionary.Add(Activities.LEARN.ToString(), MonthValues(activity.Id, year));
+                        break;
+                    default:
+                        break;
+                }
+            }
 
-            var jsonData = JsonConvert.SerializeObject(dataValuePair);
+            var jsonData = JsonConvert.SerializeObject(dictionary);
 
             return jsonData;
         }
