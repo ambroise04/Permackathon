@@ -1,8 +1,6 @@
 ﻿using Permackathon.DAL.UnitOfWork;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Permackathon.BL.UseCases.Charts
 {
@@ -24,7 +22,7 @@ namespace Permackathon.BL.UseCases.Charts
             if (sumTotal == 0)
             {
                 return new double[] { 0, 0, 0 };
-            } 
+            }
 
             var sumEat = UnitOfWork.FinancialRepository
                                 .GetAll()

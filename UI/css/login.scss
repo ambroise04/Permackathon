@@ -1,0 +1,55 @@
+body, html{
+    height: 100vh;
+    width: 100vw;
+    background-image: url(../img/hero-pleurotes.jpg);
+    background-repeat: no-repeat; 
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+
+}
+
+section {
+
+position: fixed;
+top: 300px;
+left: 100px;
+height: 100vh;
+
+
+align-self: start;
+
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+input { 
+
+width: 220px;
+height: 30px;
+font-size: 20px;
+border-radius: 5px;
+margin-right: 5px;
+padding: 5px;
+
+
+
+
+}
+
+button {
+
+    width: 150px;
+height: 45px;
+font-size: 20px;
+border-radius: 5px;
+background: #779B2B;
+// box-shadow: 2px 2px;
+color:white;
+padding: 5px;
+
+}
+

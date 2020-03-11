@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+  <link rel="stylesheet" href="css/styles.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  
+  <title>Admin PermaFungi</title>
+</head>
+<body>
+  
+  <nav>
+    <a href=""><img src="img/logo-png.png" alt=""></a>
+
+<div class="div_guest">
+  <p> Hello Julien</p>
+</div>
+
+    <div class="nav_wrapper">
+      <a  href="#menu_chart1">Répartition CA</a>
+      <a href="#menu_chart2">Graphique par Activité</a>
+      <a href="#menu_chart3">Prévisionnel</a>
+    </div>
+
+    <div class="log_out">
+<button> <a href="https://www.permafungi.be/"> Log out </a></button>
+    </div>
+
+    <div class="log_out">
+
+          </div>
+
+
+  </nav>
+
+  <!-- fin menu -->
+  
+ 
+
+  <div class="wrapper">
+
+    <section class="section_graph">
+      
+      <h1 id="menu_chart1">Répartition C.A. par secteur</h1>
+      <div id="chart">
+      
+      </div>
+
+      <form action="test.php" method="get"> 
+
+        <div class="incomes" >
+        <select name="optin" id="optin"> 
+    
+          <option class="yolobtn" value="oui">Eat</option> 
+          <option value="oui">Grow</option> 
+          <option value="non">Learn</option>
+          <!-- <input type="submit" onclick="return valideselect()" />    -->
+    
+            <input type="text" placeholder="Month">
+            <input type="number" placeholder="Incomes">
+            <button class="btn_incomes"> <a href="http://127.0.0.1:5500/apex_charts.html#menu_chart1">Enter </a> </button>
+        </div>
+    
+      </form>
+
+      <hr>  
+
+    </section>
+    
+   
+    
+  <section class="section_graph camemberg">
+    <h1 id="menu_chart2">Graphique Activité</h1>
+    <div id="chart2">
+    </div>
+  
+  </section>
+<!-- Chart 3  -->
+  
+
+
+
+<section class="section_graph">
+  <hr>  
+
+  <h1 id="menu_chart3" class="previsionnel"> Prévisionnel</h1>
+
+    <div id="chart3">
+      
+      
+    </div>
+  <form action="test.php" method="get"> 
+
+    <div class="incomes" >
+    <select name="optin" id="optin"> 
+
+      <option  class="yolobtn" value="oui">Eat</option> 
+      <option value="oui">Grow</option> 
+      <option value="non">Learn</option>
+      <!-- <input type="submit" onclick="return valideselect()" />    -->
+
+        <input type="text" placeholder="Month">
+        <input type="number" placeholder="Incomes">
+        <button class="btn_incomes"><a href="http://127.0.0.1:5500/apex_charts.html#menu_chart3">Enter </a> </button>
+    </div>
+
+  </form>
+
+ 
+    <!-- <select name="optin" id="optin"> 
+      <option value="oui">Je choisis oui</option> 
+      <option value="non">Je choisis non</option> 
+    </select> 
+    <input type="submit" onclick="return valideselect()" />    -->
+     
+
+    
+    <!-- <div id="chart4"> </div>
+    
+  </div> -->
+
+
+  
+</body>
+
+<script src="/js/apex.js"></script>
+
+<script> function valideselect() {   
+  var select = document.getElementById('optin'); 
+  var choice = select.selectedIndex; 
+  var text =  select.options[choice].value; 
+  
+ // si la valeur choisie est 'oui' 
+ if(text == 'oui') { 
+   // alors on envoie le formulaire 
+   return true; 
+ } 
+//  else { 
+//    // sinon on affiche un message et on bloque l'envoi 
+//    alert('Veuillez choisir 'oui' SVP'); 
+//    return false; 
+//  } 
+}</script>
+
+
+</html>

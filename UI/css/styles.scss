@@ -1,0 +1,240 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+// #303030 black
+// #818181 gris
+// #673B2C marron
+// #779B2B vert
+
+body {
+  font-family: Roboto, sans-serif;
+  background: rgb(241, 235, 221);
+  height: 100%;
+  overflow: hidden;
+  
+.nav_wrapper {
+
+
+margin-top: 25px;
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+
+
+}
+
+}
+nav{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  padding-left: 3vh;
+  background-color:rgb(241, 235, 221);
+  width: 10vw;
+  border-right: solid 2px  #673B2C;
+  
+  
+}
+
+@media (max-width: 640px) {
+  nav{ 
+    display: flex ;
+    flex-direction: row;
+    height: 20vh;
+    width: 100vw;
+    font-size: 50px;
+  }
+  .nav_wrapper{
+    font-size: 50px;
+    
+  }
+
+
+}
+
+a{
+  text-decoration: none;
+  // margin: 0 auto;
+  color: #673B2C;
+  align-self: flex-start;
+  padding: 3%;
+  font-size: 90%;
+}
+
+
+a:hover{
+  color: #779B2B;
+}
+a img{
+ margin-top: 20px;
+  width: 8vw;
+}
+
+.wrapper{
+  margin-left: 12vw;
+  overflow: scroll;
+  scroll-snap-type: mandatory;
+  scroll-behavior: smooth;
+  height: 100vh;
+  scroll-snap-points-y: repeat(100vh);
+  scroll-snap-type: y mandatory;
+}
+
+
+
+button a{
+  color:white
+}
+
+h1{
+  text-align: left;
+  margin-left: 100px;
+  padding: 3vh;
+  font-size: 30px;
+//  color: ;
+  text-transform: uppercase;
+}
+.section_graph{
+  height: 100vh;
+  margin-bottom: 50px;
+}
+
+
+#chart {
+  // scroll-snap-align: center;
+ // height: 100vh;
+  max-width: 650px;
+  //margin: 0 auto ;
+  padding: 4vh;
+  //height: 100vh;
+  
+}
+
+
+#chart2 {
+  
+  max-width: 650px;
+  margin: 35px auto;
+  padding: 2vh;
+  
+}
+
+// #menu_chart2{
+//   //padding-top: 30vh;
+// }
+
+#chart3 {
+ 
+  max-width: 82%;
+  margin: 35px auto;
+
+}
+// #menu_chart3{
+//   //padding-top: 20vh;
+
+// }
+
+p {
+
+  color: #779B2B ;
+
+  padding-bottom: 30px;
+
+
+
+}
+
+.div_guest {
+
+border-bottom: 1px solid black;
+margin-right:3vh;
+
+
+
+}
+
+
+.log_out {
+
+  margin-top: 50px;
+
+  border-top: 1px solid black;
+  margin-right:3vh;
+
+
+}
+
+
+button {
+
+
+  margin-top: 150px;
+  width: 100px;
+  height: 45px;
+  font-size: 20px;
+  border-radius: 5px;
+  background: #779B2B;
+  // box-shadow: 2px 2px;
+  color:white;
+  padding: 5px;
+  }
+  
+  input { 
+  
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-right: 5px;
+    padding: 5px;
+  
+  }
+
+  .incomes {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 50px;
+    padding-top: 40px;
+    padding-bottom: 30px;
+  }
+
+  .btn_incomes{
+    margin-top: 0;
+  }
+
+  hr{
+    color: grey;
+    width: 70%;
+    // margin-top: 100px;
+    // margin-bottom: 150px;
+  }
+
+  // .section_graph.camemberg {
+  //   //height: 100vh;
+    
+  //   }
+
+option {
+
+padding-right: 10px;
+
+}
+
+.yolobtn { 
+
+margin-right: 10px;
+
+
+}
+
+#optin{
+  margin-right: 10px;
+  height: 43px;
+  border-radius: 5px;
+  color: grey;
+  box-shadow: -1px -1px;
+  font-size: 20px;
+}

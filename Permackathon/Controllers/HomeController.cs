@@ -7,14 +7,14 @@ using System.Diagnostics;
 
 namespace Permackathon.Controllers
 {
-    public class ChartController : Controller
+    public class HomeController : Controller
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private FusionChart fusionChart;
         private PieChart pieChart;
 
-        public ChartController(IUnitOfWork unitOfWork, IMapper mapper)
+        public HomeController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
@@ -22,9 +22,9 @@ namespace Permackathon.Controllers
             pieChart = new PieChart(_unitOfWork);
         }
 
-        public IActionResult Pie()
+        public IActionResult Index()
         {
-            var sum = pieChart.InitilizePie(2019);
+            
             return View();
         }
 

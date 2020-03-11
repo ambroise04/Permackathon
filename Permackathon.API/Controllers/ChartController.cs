@@ -14,6 +14,7 @@ namespace Permackathon.API.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private PieChart pieChart;
         private FusionChart fusionChart;
+        private LineChart lineChart;
 
         public ChartController(IUnitOfWork unitOfWork, IMapper mapper)
         {
@@ -21,6 +22,7 @@ namespace Permackathon.API.Controllers
             _unitOfWork = unitOfWork;
             pieChart = new PieChart(_unitOfWork);
             fusionChart = new FusionChart(_unitOfWork);
+            lineChart = new LineChart(_unitOfWork);
         }
 
         [HttpGet("pie/{year}")]
@@ -43,6 +45,18 @@ namespace Permackathon.API.Controllers
                 year = DateTime.Now.Year;
             }
             var result = fusionChart.Fusion(year.Value);
+
+            return Ok(result);
+        }
+
+        [HttpGet("line/{year}")]
+        public IActionResult GetLine(int? year)
+        {
+            if (!year.HasValue)
+            {
+                year = DateTime.Now.Year;
+            }
+            var result = lineChart.Line(year.Value);
 
             return Ok(result);
         }
