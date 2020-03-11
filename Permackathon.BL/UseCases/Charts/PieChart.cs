@@ -21,6 +21,11 @@ namespace Permackathon.BL.UseCases.Charts
                                 .Where(f => f.ReportDate.Year == year)
                                 .Sum(a => a.ActualSale);
 
+            if (sumTotal == 0)
+            {
+                return new double[] { 0, 0, 0 };
+            } 
+
             var sumEat = UnitOfWork.FinancialRepository
                                 .GetAll()
                                 .Where(f => f.Activity.Id == 1)
@@ -35,8 +40,9 @@ namespace Permackathon.BL.UseCases.Charts
                                 .GetAll()
                                 .Where(f => f.Activity.Id == 3 && f.ReportDate.Year == year)
                                 .Sum(a => a.ActualSale);
+            var result = new double[] { Math.Round((double)((sumEat * 100) / sumTotal), 2), Math.Round((double)((sumGrow * 100) / sumTotal), 2), Math.Round((double)((sumLearn * 100) / sumTotal), 2) };
 
-            return new double[] {Math.Round((double)((sumEat*100)/sumTotal), 2), Math.Round((double)((sumGrow*100)/sumTotal),2), Math.Round((double)((sumLearn*100)/sumTotal),2) };
+            return result;
         }
 
     }
