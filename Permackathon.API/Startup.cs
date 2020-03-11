@@ -67,7 +67,7 @@ namespace Permackathon.API
             {
                 services.AddDbContext<ApplicationContext>(option =>
                 {
-                    option.UseSqlServer(Configuration.GetConnectionString("Local"));
+                    option.UseSqlServer(Configuration.GetConnectionString("Permackathon"));
                 });
             }
         }
@@ -81,7 +81,7 @@ namespace Permackathon.API
             }
             else
             {
-                app.UseExceptionHandler("An error was caught. Please try again later.");
+                app.UseExceptionHandler();
             }
 
             //app.UseHttpsRedirection();
