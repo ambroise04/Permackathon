@@ -1,15 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Permackathon.DAL;
+using Permackathon.DAL.Interfaces;
+using Permackathon.DAL.Repositories;
+using Permackathon.DAL.UnitOfWork;
+using System;
 
 namespace Permackathon.API
 {
@@ -25,7 +26,50 @@ namespace Permackathon.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
+
+            services.AddControllers(setupAction =>
+            {
+                setupAction.ReturnHttpNotAcceptable = true;
+            }).AddXmlDataContractSerializerFormatters();
+            //services.AddControllers();
+
+            //Our services
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IActivityRepository, ActivityRepository>();
+            services.AddTransient<ICityRepository, CityRepository>();
+            services.AddTransient<IFinancialRepository, FinancialRepository>();
+            services.AddTransient<IIndicatorRepository, IndicatorRepository>();
+            services.AddTransient<ISiteRepository, SiteRepository>();
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>()
+                                                                 .AddDefaultTokenProviders();
+
+            //AutoMapper for transfer objects
+            //TODO : https://code-maze.com/automapper-net-core/
+            services.AddAutoMapper(typeof(Startup));
+            services.AddMvc();
+
+            //DB Context
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT").Equals("Production"))
+            {
+                services.AddDbContext<ApplicationContext>(option =>
+                {
+                    option.UseSqlServer(Configuration.GetConnectionString("Permackathon"));
+                });
+            }
+            else
+            {
+                services.AddDbContext<ApplicationContext>(option =>
+                {
+                    option.UseSqlServer(Configuration.GetConnectionString("Local"));
+                });
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,10 +79,16 @@ namespace Permackathon.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("An error was caught. Please try again later.");
+            }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 

@@ -11,20 +11,27 @@ namespace Permackathon.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private FusionChart fusionChart;
         private PieChart pieChart;
 
         public ChartController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+            fusionChart = new FusionChart(_unitOfWork);
             pieChart = new PieChart(_unitOfWork);
         }
 
-        public IActionResult Index()
+        public IActionResult Pie()
         {
-            //Sample of automapper usage
-            //ActivityTO activityTO = _mapper.Map<ActivityTO>(activity);
             var sum = pieChart.InitilizePie(2019);
+            return View();
+        }
+
+        public IActionResult Fusion()
+        {
+            var result = fusionChart.Fusion(2019);
+
             return View();
         }
 

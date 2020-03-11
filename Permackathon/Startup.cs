@@ -53,7 +53,10 @@ namespace Permackathon
             }
             else
             {
-                services.AddDbContext<ApplicationContext>();
+                services.AddDbContext<ApplicationContext>(option =>
+                {
+                    option.UseSqlServer(Configuration.GetConnectionString("Permackathon"));
+                });
             }
         }
 
